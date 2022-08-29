@@ -1,0 +1,49 @@
+h2{
+    color: black;
+}
+
+.modal{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    flex-direction: column;
+    width: 95%;
+    margin: auto;
+    padding: 20px 0;
+}
+
+.trends{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    flex-direction: column;
+    width: 100%;
+}
+.suggestion{
+    width: 100%;
+}
+.imageDetails{
+    height: 400;
+    width:17%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: column;
+
+}
+
+.imageDetails img{
+    width: 100%;
+    height: 300px;
+    border-radius: 5px;
+}
+
+.trendProducts{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+}
+
