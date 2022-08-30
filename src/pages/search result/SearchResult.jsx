@@ -9,12 +9,28 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AccordionDetails from '@mui/material/AccordionDetails';
 
+function startGenerator(n){
+    let starts = []
+    for(let i=0;i<5;i++){
+        if(i<n){
+
+        }
+        else{
+            
+        }
+    }
+}
+
 
 
 
 function SearchResult() {
 
     const [allProduct, setAllProducts] = useState([]);
+
+    const [allSearchedProduct, setSearchedProduct] = useState([]);
+
+
 
 
     function getAll(n){
@@ -35,6 +51,7 @@ function SearchResult() {
                 temp.push(item)
             }
             setAllProducts(temp);
+            setSearchedProduct(temp)
     
         
     }
@@ -46,6 +63,34 @@ function SearchResult() {
     )
 
 
+    const brandsToFilter = [
+      ...new Set(allProduct.map((item) => item.brand)),
+    ];
+
+    const [selectedBrand, setselectedBrand] = useState([]);
+   
+    let updatedProperties = allProduct;
+  
+    function filterHandlr() {
+
+      console.log("from the filter handler onchange")
+    
+      if (selectedBrand) {
+
+        let temp = [];
+
+        for(let i = 0; i<selectedBrand.length;i++){
+          console.log(selectedBrand[i]);
+          updatedProperties.map((item)=>{
+           item.brand == selectedBrand[i] && temp.push(item)
+          })
+        }
+        setSearchedProduct(temp);
+        
+      }
+    
+      
+    }
 
     return (  <>
     <div className="searchPage">
@@ -62,7 +107,7 @@ function SearchResult() {
 
                 <div className="filters">
                     <h1>Search Results</h1>
-                    <Accordion>
+                    <Accordion  >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -70,9 +115,30 @@ function SearchResult() {
         >
          <h3>BRAND</h3>
         </AccordionSummary>
-        <AccordionDetails>
-        <input type="checkbox" id="brand" name="brand" value="Bike" />
-        <label for="brand">H&M</label>
+        <AccordionDetails onChange={filterHandlr}>
+
+          {
+            brandsToFilter.map((item)=>{
+              return (
+                <>
+                 <input type="checkbox" id={item} name={item} value={item} onClick={
+                  (e)=>{
+                    let neow = e.target.value;
+                    setselectedBrand(
+                      (prev)=>
+                       [...prev,neow]
+                      
+                      )
+                  }
+                  } />
+                 <label for={item}>{item}</label>
+                 <br/>
+                 <br/>
+                </>
+              )
+            })
+          }
+       
         </AccordionDetails>
       </Accordion>
 
@@ -111,7 +177,7 @@ function SearchResult() {
                 </div>
                 <div className="results">
                     {
-                        allProduct.map((item)=>{
+                        allSearchedProduct.map((item)=>{
                             return <ProductCard item={item} key={item.id}/>
                         })
                     }
